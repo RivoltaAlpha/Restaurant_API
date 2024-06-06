@@ -1,0 +1,173 @@
+#users
+###
+GET  http://localhost:8000/api/users/1
+
+### 
+POST  http://localhost:8000/api/users
+Content-Type: application/json
+
+{
+    "name": "john",
+    "contact_phone": "11111111",
+    "phone_verified":false,
+    "email": "john@example.com",
+    "email_verified": true,
+    "confirmation_code": "password123",
+    "password": "123"
+
+}
+
+###
+PUT  http://localhost:8000/api/users/4
+Content-Type: application/json
+
+{
+    "name": "johnte njoroge",
+    "contact_phone": "11111111",
+    "phone_verified":false,
+    "email": "john@example.com",
+    "email_verified": true,
+    "confirmation_code": "password123",
+    "password": "123"
+
+}
+
+###
+DELETE   http://localhost:8000/api/users/4
+Content-Type: application/json
+
+{
+    "name": "johnte njoroge",
+    "contact_phone": "11111111",
+    "phone_verified":false,
+    "email": "john@example.com",
+    "email_verified": true,
+    "confirmation_code": "password123",
+    "password": "123"
+
+}
+
+###
+GET  http://localhost:8000/api/restaurants/1
+
+###
+
+POST   http://localhost:8000/api/restaurants
+Content-Type: application/json
+
+
+{
+  "name": "Krusty Crub",
+  "street_address": "Main St",
+  "zip_code": "00008",
+  "city_id": 4
+}
+###
+
+PUT    http://localhost:8000/api/restaurants/2
+Content-Type: application/json
+
+
+{
+  "name": "Krusty Crub",
+  "street_address": "Main St",
+  "zip_code": "00008",
+  "city_id": 4
+}
+###
+
+DELETE     http://localhost:8000/api/restaurants/2
+Content-Type: application/json
+
+
+{
+  "name": "Krusty Crub",
+  "street_address": "Main St",
+  "zip_code": "00008",
+  "city_id": 4
+}
+
+#states
+###
+GET  http://localhost:8000/api/states/1
+
+###
+POST http://localhost:8000/api/states
+Content-Type: application/json
+
+
+{
+  "name": "Manhattan",
+  "code": "MH"
+}
+
+###
+PUT   http://localhost:8000/api/states/6
+Content-Type: application/json
+
+
+{
+  "name": "State of Manhattan ",
+  "code": "MH"
+}
+
+###
+DELETE   http://localhost:8000/api/states/6
+Content-Type: application/json
+
+
+{
+  "name": "State of Manhattan ",
+  "code": "MH"
+}
+
+# cities
+###
+GET  http://localhost:8000/api/cities/1
+
+
+
+###
+POST  http://localhost:8000/api/cities
+Content-Type: application/json
+
+
+{
+  "name": "Berlin",
+  "state_id": 1
+}
+
+
+###
+PUT  http://localhost:8000/api/cities/7
+Content-Type: application/json
+
+
+{
+  "name": "Munich",
+  "state_id": 4
+}
+
+
+###
+DELETE   http://localhost:8000/api/cities/7
+Content-Type: application/json
+
+
+{
+  "name": "Munich",
+  "state_id": 4
+}
+
+#orders
+###
+GET  http://localhost:8000/api/orders/1
+
+###
+POST   http://localhost:8000/api/orders/1
+
+###
+PUt   http://localhost:8000/api/orders/1
+
+###
+DELETE    http://localhost:8000/api/orders/1

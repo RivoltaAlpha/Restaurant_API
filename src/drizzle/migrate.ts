@@ -6,7 +6,7 @@ import db, { client } from "./db";
 async function migration() {
 
     console.log("======== Migrations started ========")
-    await migrate(db, { migrationsFolder: "src/migration" })
+    await migrate(db, { migrationsFolder: "./src/drizzle/migration" })
     await client.end()
     console.log("======== Migrations ended ========")
     process.exit(0)

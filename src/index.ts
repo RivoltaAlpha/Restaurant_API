@@ -1,16 +1,49 @@
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import { serve } from "@hono/node-server";
+import { Hono } from "hono";
+import "dotenv/config";
+import { logger } from "hono/logger";
+import { csrf } from "hono/csrf";
+import { trimTrailingSlash } from "hono/trailing-slash";
+import { timeout } from "hono/timeout";
+import { HTTPException } from "hono/http-exception";
+import { prometheus } from "@hono/prometheus";
+import { restaurantRouter } from "./restaurants/restaurant.router";
+import { stateRouter } from "./state/state.routers";
+import { userRouter } from "./users/routers";
+import { cityRouter } from "./city/city.router";
+import { orderRouter } from "./orders/orders.router";
 
-const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+const app = new Hono().basePath("/api");
+const customTimeoutException = () =>
+  new HTTPException(408, {
+    message: `Request timeout after waiting for more than 10 seconds`,
+  });
+const { printMetrics, registerMetrics } = prometheus();
 
-const port = 3000
-console.log(`Server is running on port ${port}`)
+// inbuilt middlewares
+app.use(logger()); //logs request and response to the console
+app.use(csrf()); //prevents CSRF attacks by checking request headers.
+app.use(trimTrailingSlash()); //removes trailing slashes from the request URL
+app.use("/", timeout(10000, customTimeoutException));
+//3rd party middlewares
+app.use("*", registerMetrics);
+
+app.get("/timeout", async (c) => {
+  await new Promise((resolve) => setTimeout(resolve, 11000));
+  return c.text("data after 5 seconds", 200);
+});
+app.get("/metrics", printMetrics);
+
+// custom routes
+app.route("/", restaurantRouter);
+app.route("/", userRouter);
+app.route("/", stateRouter);
+app.route("/", cityRouter);
+app.route("/", orderRouter);
 
 serve({
   fetch: app.fetch,
-  port
-})
+  port: Number(process.env.PORT) || 3000,
+});
+console.log(`Server is running on port ${process.env.PORT}`);

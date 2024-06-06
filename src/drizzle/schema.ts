@@ -7,8 +7,8 @@ import { Many } from 'drizzle-orm';
 export const restaurant = pgTable('restaurant', {
     id: serial('id').primaryKey(),
     name: text('name').notNull(),
-    street_address: text('street_address').notNull().references(() => address.street_address_1, { onDelete: "cascade" }),
-    zip_code: text('zip_code').notNull().references(() => address.zip_code, { onDelete: "cascade" }),
+    street_address: text('street_address').notNull(),
+    zip_code: text('zip_code').notNull(),
     city_id: integer('city_id').notNull().references(() => city.id, { onDelete: "cascade" }),
     created_at: timestamp('created_at').defaultNow().notNull(),
     updated_at: timestamp('updated_at').defaultNow().notNull(),
@@ -288,3 +288,15 @@ export const state = pgTable('state', {
 export const stateRelations = relations(state, ({ many }) => ({
     cities: many(city),
 }));
+
+// Types
+export type TIUser = typeof users.$inferInsert;
+export type TSUser = typeof users.$inferSelect;
+export type TIRestaurant = typeof restaurant.$inferInsert;
+export type TSRestaurant = typeof restaurant.$inferSelect;
+export type TIState = typeof state.$inferInsert;
+export type TSState = typeof state.$inferSelect;
+export type TICity = typeof city.$inferInsert;
+export type TSCity = typeof city.$inferSelect;
+export type TIOrder = typeof orders.$inferInsert;
+export type TSOrder = typeof orders.$inferSelect;
