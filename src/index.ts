@@ -12,6 +12,15 @@ import { stateRouter } from "./state/state.routers";
 import { userRouter } from "./users/routers";
 import { cityRouter } from "./city/city.router";
 import { orderRouter } from "./orders/orders.router";
+import { orderMenuItemRouter } from "./order-menu-item/order-menu.router";
+import { orderStatusRouter } from "./order-status/order-status.router";
+import { addressRouter } from "./address/address.router";
+import { driverRouter } from "./driver/driver.router";
+import { menuItemRouter } from "./menu-item/menu-router";
+import { statusRouter } from "./status-catalog/status-routes"
+import { commentRouter } from "./comments/comments-routers"
+import { categoryRouter } from "./category/category.routers"
+import { ownersRouter } from "./restaurant-owners/owners.routers";
 
 
 const app = new Hono().basePath("/api");
@@ -41,6 +50,15 @@ app.route("/", userRouter);
 app.route("/", stateRouter);
 app.route("/", cityRouter);
 app.route("/", orderRouter);
+app.route("/", orderMenuItemRouter);
+app.route("/", orderStatusRouter);
+app.route("/", addressRouter);
+app.route("/", driverRouter);
+app.route("/", menuItemRouter);
+app.route("/", statusRouter);
+app.route("/", commentRouter);
+app.route("/", categoryRouter);
+app.route("/", ownersRouter);
 
 serve({
   fetch: app.fetch,
